@@ -7,7 +7,7 @@
 - Machine - Physical or virtual on which k8s is installed
 - Worker machine where containers will be launched by k8s
 - Previously referred to as Minions.
-- Need to have more than one node. Because if your only node fails, our app goes down
+- Need to have more than one node. If your only node fails, our app goes down
 
 #### Master Node
 
@@ -35,13 +35,16 @@
 - K8s **does not** deploy containers directly on the worker nodes
 - Encapsulated within a pod - which is a single instance of an application
 - Smallest object you can create in k8s
-- We don't spin up a new instance of the app within an existing pod. We will create a new pod entirely and bring up our new app instance in it.
+- We don't spin up a new instance of the app within an existing pod.
+  - We will create a new pod entirely and bring up our new app instance in it.
 - Multiple pods **can be** within the same node
 - **Pods have a 1:1 relationship with containers running your application**
 
 #### Multi-container Pods
 
-- We can have multiple containers within the same pod however, these containers aren't the same. One container will be our app, the other container will be a "helper" container
+- We can have multiple containers within the same pod
+  - However, these containers aren't the same.
+  - One container will be our app, the other container will be a "helper" container
 - All containers within a pod will be killed if a pod goes down.
 - This is a rare use case
 
@@ -60,6 +63,7 @@
 
 `kubectl describe pod <pod-name>` will give us more details about a particular pod
 
-`kubectl run nginx` deploys a docker container by creating a pod. First creates a pod automatically and deploys an instance of the `nginx` docker image
+`kubectl run nginx` deploys a docker container by creating a pod.
+First creates a pod automatically and deploys an instance of the `nginx` docker image
 
 ---
