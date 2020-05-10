@@ -50,5 +50,3 @@
 `kubectl run nginx` deploys a docker container by creating a pod. First creates a pod automatically and deploys an instance of the `nginx` docker image
 
 ---
-
-# 13: Recap - Demo - Creating Pods with YAML
