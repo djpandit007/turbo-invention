@@ -32,5 +32,4 @@ jobs:
       - name: YAML Linting Action
         uses: karancode/yamllint-github-action@master
         with:
-          yamllint_file_or_dir: './*.yml'
           yamllint_strict: false
