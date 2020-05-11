@@ -67,3 +67,21 @@
 First creates a pod automatically and deploys an instance of the `nginx` docker image
 
 ---
+
+## 18: Practice Test - Pods
+
+`kubectl get pods -o wide` gives us slightly more information about the pods
+
+`kubectl delete pod <pod-name>` deletes the pod with name `<pod-name>`
+
+`kubectl create -f <filename>` creates `kind` specified in the `<filename>`
+
+`kubectl apply -f <filename>` updates existing `kind` and applies changes
+
+`kubectl edit pod <pod-name>` edits `<pod-name>` config.
+Changes are applied on file save/exit
+
+`kubectl get pod <pod-name> -o yaml > pod-definition.yaml` extracts definition.
+`<pod-name>` pod YAML definition will be extracted  into `pod-definition.yaml`
+
+[YAML file used](labs/18-redis.yml)
