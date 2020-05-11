@@ -27,3 +27,10 @@ jobs:
         uses: avto-dev/markdown-lint@v1.1.0
         with:
           args: './*.md'
+
+      # Checks YAML files for lint errors
+      - name: YAML Linting Action
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_file_or_dir: '*.yml'
+          yamllint_strict: false
