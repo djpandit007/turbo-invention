@@ -83,3 +83,5 @@ Changes are applied on file save/exit
 
 `kubectl get pod <pod-name> -o yaml > pod-definition.yaml` extracts definition.
 `<pod-name>` pod YAML definition will be extracted  into `pod-definition.yaml`
+
+[YAML file used](labs/18-redis.yml)
