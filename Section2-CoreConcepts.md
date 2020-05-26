@@ -82,6 +82,37 @@ First creates a pod automatically and deploys an instance of the `nginx` docker 
 Changes are applied on file save/exit
 
 `kubectl get pod <pod-name> -o yaml > pod-definition.yaml` extracts definition.
-`<pod-name>` pod YAML definition will be extracted  into `pod-definition.yaml`
+`<pod-name>` pod YAML definition will be extracted into `pod-definition.yaml`
 
 [YAML file used](labs/18-redis.yml)
+
+---
+
+## 21: Recap - ReplicaSets
+
+**Replica Set** allows us to have High Availability.
+It is also used for Load Balancing and Scaling.
+
+ReplicaSet MUST have a `selector` definition (required).
+`selector` definition helps identify which pods fall under a replica set.
+This is important because ReplicaSet can also manage pods which were not
+created as part of the replica set creation.
+Replica set uses labels and selectors to determine which pods to monitor.
+
+ReplicationController does not need this (optional).
+
+### Commands
+
+`kubectl get replicaset` gives us a list of replica sets currently available.
+
+`kubectl delete replicaset myapp-replicaset` deletes the replica set.
+It will also delete all underlying Pods.
+
+`kubectl replace -f <filename>` will replace/update `kind` specified in `filename`
+
+`kubectl scale --replicas=<number> -f <filename>`
+will scale `kind` specified in `filename`.
+This will scale the `kind` from the command line without changing the contents
+of `filename`.
+
+---
