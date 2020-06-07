@@ -4,27 +4,27 @@
 
 ### Node
 
-- Machine - Physical or virtual on which k8s is installed
-- Worker machine where containers will be launched by k8s
+- Machine - Physical or virtual on which k8s is installed.
+- Worker machine where containers will be launched by k8s.
 - Previously referred to as Minions.
-- Need to have more than one node. If your only node fails, our app goes down
+- Need to have more than one node. If your only node fails, our app goes down.
 
 #### Master Node
 
-- Type of k8s node which is configured as "Master"
-- Watches over the nodes in cluster
-- Responsible for orchestration of nodes
-- Has the kube-apiserver, which makes it the master
-- Also has the controller/control manager and scheduler
+- Type of k8s node which is configured as "Master".
+- Watches over the nodes in cluster.
+- Responsible for orchestration of nodes.
+- Has the kube-apiserver, which makes it the master.
+- Also has the controller/control manager and scheduler.
 
 #### Worker Node
 
-- Type of k8s node which is controlled by the master node
-- Has the kubelet agent, which makes it the worker
+- Type of k8s node which is controlled by the master node.
+- Has the kubelet agent, which makes it the worker.
 
 ### Cluster
 
-- Number of nodes ground together
+- Number of nodes grouped together.
 
 ---
 
@@ -32,21 +32,21 @@
 
 ### Pods
 
-- K8s **does not** deploy containers directly on the worker nodes
-- Encapsulated within a pod - which is a single instance of an application
-- Smallest object you can create in k8s
+- Kubernetes **does not** deploy containers directly on the worker nodes.
+- Encapsulated within a pod - which is a single instance of an application.
+- Smallest object you can create in Kubernetes.
 - We don't spin up a new instance of the app within an existing pod.
   - We will create a new pod entirely and bring up our new app instance in it.
-- Multiple pods **can be** within the same node
-- **Pods have a 1:1 relationship with containers running your application**
+- Multiple pods **can be** within the same node.
+- **Pods have a 1:1 relationship with containers running your application.**
 
 #### Multi-container Pods
 
-- We can have multiple containers within the same pod
+- We can have multiple containers within the same pod.
   - However, these containers aren't the same.
-  - One container will be our app, the other container will be a "helper" container
+  - One container will be our app, the other container will be a "helper" container.
 - All containers within a pod will be killed if a pod goes down.
-- This is a rare use case
+- This is a rare use case.
 
 ---
 
@@ -54,8 +54,8 @@
 
 ### YAML Basics
 
-- YAML denotes nesting through indentations
-- Adding a hyphen `-` before a line indicates that the line is an element in a list/array
+- YAML denotes nesting through indentations.
+- Adding a hyphen `-` before a line indicates that the line is an element in a list/array.
 
 ---
 
@@ -102,40 +102,40 @@ Limit resources in a namespace by creating a resource quota.
 
 ## Noteworthy Commands
 
-`kubectl get pods` will give us a list of pods currently available
+`kubectl get pods` will give us a list of pods currently available.
 
-`kubectl describe pod <pod-name>` will give us more details about a particular pod
+`kubectl describe pod <pod-name>` will give us more details about a particular pod.
 
 `kubectl run nginx` deploys a docker container by creating a pod.
-First creates a pod automatically and deploys an instance of the `nginx` docker image
+First creates a pod automatically and deploys an instance of the `nginx` docker image.
 
-`kubectl get pods -o wide` gives us slightly more information about the pods
+`kubectl get pods -o wide` gives us slightly more information about the pods.
 
 `kubectl get pods --namespace=<ns>` gives us pods from the specified namespace.
 
 `kubectl get pods --all-namespaces` lists pods from all namespaces.
 
-`kubectl delete pod <pod-name>` deletes the pod with name `<pod-name>`
+`kubectl delete pod <pod-name>` deletes the pod with name `<pod-name>`.
 
-`kubectl create -f <filename>` creates `kind` specified in the `<filename>`
+`kubectl create -f <filename>` creates `kind` specified in the `<filename>`.
 
 `kubectl create -f <filename> --namespace=<ns>`
 creates `kind` specified in the `<filename>` in the `<ns>` namespace.
 
-`kubectl apply -f <filename>` updates existing `kind` and applies changes
+`kubectl apply -f <filename>` updates existing `kind` and applies changes.
 
 `kubectl edit pod <pod-name>` edits `<pod-name>` config.
-Changes are applied on file save/exit
+Changes are applied on file save/exit.
 
 `kubectl get pod <pod-name> -o yaml > pod-definition.yaml` extracts definition.
-`<pod-name>` pod YAML definition will be extracted into `pod-definition.yaml`
+`<pod-name>` pod YAML definition will be extracted into `pod-definition.yaml`.
 
 `kubectl get replicaset` gives us a list of replica sets currently available.
 
 `kubectl delete replicaset myapp-replicaset` deletes the replica set.
 It will also delete all underlying Pods.
 
-`kubectl replace -f <filename>` will replace/update `kind` specified in `filename`
+`kubectl replace -f <filename>` will replace/update `kind` specified in `filename`.
 
 `kubectl scale --replicas=<number> -f <filename>`
 will scale `kind` specified in `filename`.
