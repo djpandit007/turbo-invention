@@ -57,35 +57,6 @@
 - YAML denotes nesting through indentations
 - Adding a hyphen `-` before a line indicates that the line is an element in a list/array
 
-### Commands related to Pods
-
-`kubectl get pods` will give us a list of pods currently available
-
-`kubectl describe pod <pod-name>` will give us more details about a particular pod
-
-`kubectl run nginx` deploys a docker container by creating a pod.
-First creates a pod automatically and deploys an instance of the `nginx` docker image
-
----
-
-## 18: Practice Test - Pods
-
-`kubectl get pods -o wide` gives us slightly more information about the pods
-
-`kubectl delete pod <pod-name>` deletes the pod with name `<pod-name>`
-
-`kubectl create -f <filename>` creates `kind` specified in the `<filename>`
-
-`kubectl apply -f <filename>` updates existing `kind` and applies changes
-
-`kubectl edit pod <pod-name>` edits `<pod-name>` config.
-Changes are applied on file save/exit
-
-`kubectl get pod <pod-name> -o yaml > pod-definition.yaml` extracts definition.
-`<pod-name>` pod YAML definition will be extracted into `pod-definition.yaml`
-
-[YAML file used](labs/18-redis.yml)
-
 ---
 
 ## 21: Recap - ReplicaSets
@@ -101,7 +72,43 @@ Replica set uses labels and selectors to determine which pods to monitor.
 
 ReplicationController does not need this (optional).
 
-### Commands
+---
+
+## 22: Recap - Deployments
+
+Pod deploys a single instance of our application.
+Container is encapsulated in a pod.
+Multiple pods are deployed using replication controller/replica set.
+**Deployment** is a Kubernetes object that comes higher in this hierarchy.
+
+Deployment provides us the capability to upgrade underlying instances seamlessly.
+Deployment YAML file is similar to the Replica Set definition file.
+Only the `kind` needs to be changed to `Deployment`.
+
+---
+
+## Noteworthy Commands
+
+`kubectl get pods` will give us a list of pods currently available
+
+`kubectl describe pod <pod-name>` will give us more details about a particular pod
+
+`kubectl run nginx` deploys a docker container by creating a pod.
+First creates a pod automatically and deploys an instance of the `nginx` docker image
+
+`kubectl get pods -o wide` gives us slightly more information about the pods
+
+`kubectl delete pod <pod-name>` deletes the pod with name `<pod-name>`
+
+`kubectl create -f <filename>` creates `kind` specified in the `<filename>`
+
+`kubectl apply -f <filename>` updates existing `kind` and applies changes
+
+`kubectl edit pod <pod-name>` edits `<pod-name>` config.
+Changes are applied on file save/exit
+
+`kubectl get pod <pod-name> -o yaml > pod-definition.yaml` extracts definition.
+`<pod-name>` pod YAML definition will be extracted into `pod-definition.yaml`
 
 `kubectl get replicaset` gives us a list of replica sets currently available.
 
@@ -115,15 +122,6 @@ will scale `kind` specified in `filename`.
 This will scale the `kind` from the command line without changing the contents
 of `filename`.
 
----
+`kubectl get deployments` shows us the newly created deployment.
 
-## 22: Recap - Deployments
-
-Pod deploys a single instance of our application.
-Container is encapsulated in a pod.
-Multiple pods are deployed using replication controller/replica set.
-**Deployment** is a Kubernetes object that comes higher in this hierarchy.
-
-Deployment provides us the capability to upgrade underlying instances seamlessly.
-Deployment YAML file is similar to the Replica Set definition file.
-Only the `kind` needs to be changed to `Deployment`.
+`kubectl get all` show us all the created objects.
