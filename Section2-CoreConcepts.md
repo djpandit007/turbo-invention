@@ -74,7 +74,7 @@ ReplicationController does not need this (optional).
 
 ---
 
-## 22: Recap - Deployments
+## 24: Recap - Deployments
 
 Pod deploys a single instance of our application.
 Container is encapsulated in a pod.
@@ -84,6 +84,19 @@ Multiple pods are deployed using replication controller/replica set.
 Deployment provides us the capability to upgrade underlying instances seamlessly.
 Deployment YAML file is similar to the Replica Set definition file.
 Only the `kind` needs to be changed to `Deployment`.
+
+---
+
+## 30: Recap - Namespaces
+
+- `default` namespace is created automatically by Kubernetes
+when the cluster is first setup.
+- `kube-system` is another namespace created at cluster startup.
+It contains a set of pods and services for internal purpose.
+This is isolated from users to prevent accidental changes/deletions.
+- `kube-public` contains resources that should be made available to all users.
+
+Limit resources in a namespace by creating a resource quota.
 
 ---
 
@@ -98,9 +111,16 @@ First creates a pod automatically and deploys an instance of the `nginx` docker 
 
 `kubectl get pods -o wide` gives us slightly more information about the pods
 
+`kubectl get pods --namespace=<ns>` gives us pods from the specified namespace.
+
+`kubectl get pods --all-namespaces` lists pods from all namespaces.
+
 `kubectl delete pod <pod-name>` deletes the pod with name `<pod-name>`
 
 `kubectl create -f <filename>` creates `kind` specified in the `<filename>`
+
+`kubectl create -f <filename> --namespace=<ns>`
+creates `kind` specified in the `<filename>` in the `<ns>` namespace.
 
 `kubectl apply -f <filename>` updates existing `kind` and applies changes
 
@@ -128,6 +148,11 @@ of `filename`.
 
 Using `--dry-run` tells us whether the resource can be created.
 It will also tell us if our command is right.
+
+`kubectl create namespace dev` creates a new namespace called `dev`.
+
+`kubectl config set-context $(kubectl config current context) --namespace=<ns>`
+changes the current namespace to `<ns>`.
 
 ### Imperative Commands
 
