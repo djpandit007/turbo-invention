@@ -125,3 +125,32 @@ of `filename`.
 `kubectl get deployments` shows us the newly created deployment.
 
 `kubectl get all` show us all the created objects.
+
+Using `--dry-run` tells us whether the resource can be created.
+It will also tell us if our command is right.
+
+### Imperative Commands
+
+`kubectl run nginx --image=nginx --dry-run -o yaml`
+generates pod manifest YAML.
+Doesn't create the pod, only dry run.
+
+`kubectl create deployment --image=nginx nginx --dry-run=client -o yaml`
+generates deployment YAML file. Doesn't create the deployment, only dry run.
+`kubectl create deployment` does not have a `--replicas` option.
+We can first create it and then scale it using the `kubectl scale` command.
+Or we can save the deployment YAML to a file
+and then update the YAML file with the replicas or any other field
+before creating the deployment.
+
+`kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml`
+creates a service named `redis-service` of type `ClusterIP`
+to expose pod redis on port 6379.
+This will automatically use the pod's labels as selectors.
+
+OR
+
+`kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml`
+will not use the pods labels as selectors.
+Instead it will assume selectors as `app=redis`.
+However, we cannot pass in selectors as an option.
