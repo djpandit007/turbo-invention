@@ -1,0 +1,29 @@
+# This definition is similar to a ReplicaSet.
+# We've added resource limits and the correct `kind`.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end

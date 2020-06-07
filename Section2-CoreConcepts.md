@@ -57,35 +57,6 @@
 - YAML denotes nesting through indentations
 - Adding a hyphen `-` before a line indicates that the line is an element in a list/array
 
-### Commands related to Pods
-
-`kubectl get pods` will give us a list of pods currently available
-
-`kubectl describe pod <pod-name>` will give us more details about a particular pod
-
-`kubectl run nginx` deploys a docker container by creating a pod.
-First creates a pod automatically and deploys an instance of the `nginx` docker image
-
----
-
-## 18: Practice Test - Pods
-
-`kubectl get pods -o wide` gives us slightly more information about the pods
-
-`kubectl delete pod <pod-name>` deletes the pod with name `<pod-name>`
-
-`kubectl create -f <filename>` creates `kind` specified in the `<filename>`
-
-`kubectl apply -f <filename>` updates existing `kind` and applies changes
-
-`kubectl edit pod <pod-name>` edits `<pod-name>` config.
-Changes are applied on file save/exit
-
-`kubectl get pod <pod-name> -o yaml > pod-definition.yaml` extracts definition.
-`<pod-name>` pod YAML definition will be extracted into `pod-definition.yaml`
-
-[YAML file used](labs/18-redis.yml)
-
 ---
 
 ## 21: Recap - ReplicaSets
@@ -101,7 +72,43 @@ Replica set uses labels and selectors to determine which pods to monitor.
 
 ReplicationController does not need this (optional).
 
-### Commands
+---
+
+## 22: Recap - Deployments
+
+Pod deploys a single instance of our application.
+Container is encapsulated in a pod.
+Multiple pods are deployed using replication controller/replica set.
+**Deployment** is a Kubernetes object that comes higher in this hierarchy.
+
+Deployment provides us the capability to upgrade underlying instances seamlessly.
+Deployment YAML file is similar to the Replica Set definition file.
+Only the `kind` needs to be changed to `Deployment`.
+
+---
+
+## Noteworthy Commands
+
+`kubectl get pods` will give us a list of pods currently available
+
+`kubectl describe pod <pod-name>` will give us more details about a particular pod
+
+`kubectl run nginx` deploys a docker container by creating a pod.
+First creates a pod automatically and deploys an instance of the `nginx` docker image
+
+`kubectl get pods -o wide` gives us slightly more information about the pods
+
+`kubectl delete pod <pod-name>` deletes the pod with name `<pod-name>`
+
+`kubectl create -f <filename>` creates `kind` specified in the `<filename>`
+
+`kubectl apply -f <filename>` updates existing `kind` and applies changes
+
+`kubectl edit pod <pod-name>` edits `<pod-name>` config.
+Changes are applied on file save/exit
+
+`kubectl get pod <pod-name> -o yaml > pod-definition.yaml` extracts definition.
+`<pod-name>` pod YAML definition will be extracted into `pod-definition.yaml`
 
 `kubectl get replicaset` gives us a list of replica sets currently available.
 
@@ -115,4 +122,35 @@ will scale `kind` specified in `filename`.
 This will scale the `kind` from the command line without changing the contents
 of `filename`.
 
----
+`kubectl get deployments` shows us the newly created deployment.
+
+`kubectl get all` show us all the created objects.
+
+Using `--dry-run` tells us whether the resource can be created.
+It will also tell us if our command is right.
+
+### Imperative Commands
+
+`kubectl run nginx --image=nginx --dry-run -o yaml`
+generates pod manifest YAML.
+Doesn't create the pod, only dry run.
+
+`kubectl create deployment --image=nginx nginx --dry-run=client -o yaml`
+generates deployment YAML file. Doesn't create the deployment, only dry run.
+`kubectl create deployment` does not have a `--replicas` option.
+We can first create it and then scale it using the `kubectl scale` command.
+Or we can save the deployment YAML to a file
+and then update the YAML file with the replicas or any other field
+before creating the deployment.
+
+`kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml`
+creates a service named `redis-service` of type `ClusterIP`
+to expose pod redis on port 6379.
+This will automatically use the pod's labels as selectors.
+
+OR
+
+`kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml`
+will not use the pods labels as selectors.
+Instead it will assume selectors as `app=redis`.
+However, we cannot pass in selectors as an option.
