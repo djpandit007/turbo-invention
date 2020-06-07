@@ -116,3 +116,14 @@ This will scale the `kind` from the command line without changing the contents
 of `filename`.
 
 ---
+
+## 22: Recap - Deployments
+
+Pod deploys a single instance of our application.
+Container is encapsulated in a pod.
+Multiple pods are deployed using replication controller/replica set.
+**Deployment** is a Kubernetes object that comes higher in this hierarchy.
+
+Deployment provides us the capability to upgrade underlying instances seamlessly.
+Deployment YAML file is similar to the Replica Set definition file.
+Only the `kind` needs to be changed to `Deployment`.
