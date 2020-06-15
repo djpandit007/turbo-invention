@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+    - name: myapp
+      image: ubuntu
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      # Inject all variables defined in config map
+      envFrom:
+        - configMapRef:
+            name: app-config # Name of config map in definition
+      # Inject ONE variable
+      env:
+        - name: APP_COLOR
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_COLOR # Name of variable from config map
+      # Inject data as file in a volume
+      volumes:
+        - name: app-config-volume # Name of volume
+          configMap:
+            name: app-config # Name of config map
