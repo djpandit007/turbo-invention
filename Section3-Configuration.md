@@ -39,6 +39,16 @@ If we mount the secret as a volume in the pod, each attribute in the secret is
 created as a file with the value of the secret as its content.
 These files as stored under the directory `/opt/<secret-name>/`.
 
+## 45: Security Contexts
+
+We can define a set of security standards on a docker container.
+
+These can be configured in Kubernetes as well.
+We can configure the security settings at a container level or at a pod level.
+Pod level settings will carry over to all the containers within the pod.
+If configured at both the pod and the container, the settings on the container
+will override the settings on the pod.
+
 ## Noteworthy Commands
 
 ```bash
@@ -88,3 +98,5 @@ and the data from `<path-to-file>` is read and stored under the name of the file
 `echo -n '<value>' | base64` will convert `<value>` into base64 encoded string.
 
 `echo -n '<value>' | base64 --decode` will decode the base64 `<value>` into string.
+
+`kubectl exec <pod-name> -- <command>` will run `<command>` in `<pod-name>`.
