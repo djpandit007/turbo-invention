@@ -13,7 +13,7 @@ spec:
       # Adds security context for the container
       securityContext:
         runAsUser: 1000
-        # Capabilities are only supported at the container level NOT at the pod level
+        # Only supported at the container level NOT at the pod level
         capabilities:
           add: ["MAC_ADMIN"]
       resources:
