@@ -49,6 +49,33 @@ Pod level settings will carry over to all the containers within the pod.
 If configured at both the pod and the container, the settings on the container
 will override the settings on the pod.
 
+## 47: Service Account
+
+There are 2 types of accounts on Kubernetes:
+
+1. User Account: Used by humans
+
+2. Service Account: Used by an application to interact with Kubernetes cluster.
+   - Prometheus is used as a service account to pull Kubernetes API for
+     performance metrics.
+   - An automated build tool like Jenkins uses service accounts to deploy
+     applications on the Kubernetes cluster.
+   - A `default` service account is automatically created for each namespace.
+
+When a service account is created, it automatically creates a token.
+This token must be used by the external application while authenticating
+to the Kubernetes API.
+The token is stored as a secret object.
+Service account of an existing pods cannot be edited.
+We must delete and recreate the pod.
+
+When a service account is created, the following things happen:
+
+1. Create service account object.
+2. Generate token for service account.
+3. Create a secret object and stores the token inside the secret object.
+4. Link secret object to the service account.
+
 ## Noteworthy Commands
 
 ```bash
@@ -100,3 +127,7 @@ and the data from `<path-to-file>` is read and stored under the name of the file
 `echo -n '<value>' | base64 --decode` will decode the base64 `<value>` into string.
 
 `kubectl exec <pod-name> -- <command>` will run `<command>` in `<pod-name>`.
+
+`kubectl create serviceaccount <name>` will create a service account `<name>`.
+
+`kubectl get serviceaccount` will list all service accounts.
