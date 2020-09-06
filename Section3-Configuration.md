@@ -116,6 +116,14 @@ Taint Effects:
    Existing pods will be evicted if they don't tolerate the taint.
    These pods may have been scheduled before the taint was applied.
 
+## 62: Node Selectors
+
+Node selector is a simple, basic concept which helps us assign pod to a node.
+This is done by labeling the node with some key-value pair.
+Then we add this pair under the `nodeSelector` section in pod definition YAML.
+Node selector cannot be used to build complex rules like `NOT`, `AND`, etc.
+To tackle this shortcoming, we use Node Affinity rules.
+
 ## Noteworthy Commands
 
 ```bash
@@ -177,6 +185,9 @@ will apply a taint `<node-name>` with `key=value` pair and `<taint-effect>`.
 
 `kubectl taint nodes <node-name> key=value:<taint-effect>-`
 will un-taint `<node-name>` with `key=value` pair and `<taint-effect>`.
-Note the `-` sign at the very end of the command. This removes the taint.
+Note the minus(`-`) sign at the very end of the command. This removes the taint.
 
 `kubectl describe node <node-name> | grep Taint` shows taint applied to `<node-name>`.
+
+`kubectl label nodes <node-name> <label-key>=<label-value>` labels node `<node-name>`
+with `<label-key>=<label-value>`.
