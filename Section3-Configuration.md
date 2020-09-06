@@ -5,7 +5,7 @@
 The `command` field defines the operation/command to run on startup.
 The `args` field defines the arguments passed to `command`.
 
-## 38: Environment Variables
+## 42: Environment Variables
 
 To set an environment variable use the `env` property.
 `env` property is an array and each item in the array has a `name` and `value` property.
@@ -14,7 +14,7 @@ To set an environment variable use the `env` property.
 Shown above directly specifies the environment variables using a key-value pair.
 Environment variables can also be set using config maps and secrets.
 
-## 39: Config Maps
+## 43: Config Maps
 
 Config maps are used to pass configuration data in the form of key-value pairs.
 There are 2 phases involved in configuring config maps:
@@ -25,7 +25,7 @@ There are 2 phases involved in configuring config maps:
 To inject an environment variable into a pod definition,
 add a new **list** property called `envFrom`.
 
-## 41: Secrets
+## 46: Secrets
 
 Secrets are used to store sensitive information like password or keys.
 Similar to a `ConfigMap`, we need to create the secret and inject into a pod.
