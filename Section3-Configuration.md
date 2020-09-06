@@ -124,6 +124,22 @@ Then we add this pair under the `nodeSelector` section in pod definition YAML.
 Node selector cannot be used to build complex rules like `NOT`, `AND`, etc.
 To tackle this shortcoming, we use Node Affinity rules.
 
+## 63: Node Affinity
+
+Node affinity ensures that pods are hosted on particular nodes.
+
+There are 2 types of node affinities:
+
+1. `requiredDuringSchedulingIgnoredDuringExecution`:
+   If matching node doesn't exist, pod won't be scheduled.
+   Pods will continue to run and changes to pod affinities won't impact, once scheduled.
+2. `preferredDuringSchedulingIgnoredDuringExecution`:
+   If matching node doesn't exist, scheduler will ignore pod affinity rules.
+   Pods will continue to run and changes to pod affinities won't impact, once scheduled.
+3. `requiredDuringSchedulingRequiredDuringExecution`:
+   If matching node doesn't exist, pod won't be scheduled.
+   Pods not matching affinity changes will be evicted during execution.
+
 ## Noteworthy Commands
 
 ```bash
