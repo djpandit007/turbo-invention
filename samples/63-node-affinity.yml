@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: data-processor
+      image: data-processor
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: size
+                operator: Exists
+              - key: size
+                operator: In
+                values:
+                  - Large
+                    Medium
+              - key: size
+                operator: NotIn
+                values:
+                  - Small

@@ -5,7 +5,7 @@
 The `command` field defines the operation/command to run on startup.
 The `args` field defines the arguments passed to `command`.
 
-## 38: Environment Variables
+## 42: Environment Variables
 
 To set an environment variable use the `env` property.
 `env` property is an array and each item in the array has a `name` and `value` property.
@@ -14,7 +14,7 @@ To set an environment variable use the `env` property.
 Shown above directly specifies the environment variables using a key-value pair.
 Environment variables can also be set using config maps and secrets.
 
-## 39: Config Maps
+## 43: Config Maps
 
 Config maps are used to pass configuration data in the form of key-value pairs.
 There are 2 phases involved in configuring config maps:
@@ -25,7 +25,7 @@ There are 2 phases involved in configuring config maps:
 To inject an environment variable into a pod definition,
 add a new **list** property called `envFrom`.
 
-## 41: Secrets
+## 46: Secrets
 
 Secrets are used to store sensitive information like password or keys.
 Similar to a `ConfigMap`, we need to create the secret and inject into a pod.
@@ -39,7 +39,7 @@ If we mount the secret as a volume in the pod, each attribute in the secret is
 created as a file with the value of the secret as its content.
 These files as stored under the directory `/opt/<secret-name>/`.
 
-## 45: Security Contexts
+## 51: Security Contexts
 
 We can define a set of security standards on a docker container.
 
@@ -49,7 +49,7 @@ Pod level settings will carry over to all the containers within the pod.
 If configured at both the pod and the container, the settings on the container
 will override the settings on the pod.
 
-## 47: Service Account
+## 53: Service Account
 
 There are 2 types of accounts on Kubernetes:
 
@@ -75,6 +75,70 @@ When a service account is created, the following things happen:
 2. Generate token for service account.
 3. Create a secret object and stores the token inside the secret object.
 4. Link secret object to the service account.
+
+## 56: Resource Requirements
+
+- Whenever a pod is placed on a node, it consumes resources available to that node.
+- Kubernetes scheduler decides which node a pod goes to.
+- If the resources requested by a pod aren't available on any pod,
+Kubernetes holds back scheduling the pod.
+  - The pod will remain in a "pending" state. The pod events will show the reason.
+
+Resource `requests` define the minimum amount of compute resources required.
+Resource `limits` define the maximum amount of compute resources allowed.
+
+If the pod tries to go above the defined limits, Kubernetes will throttle the CPU.
+If the pod consumes more memory than the limit, Kubernetes will let it do so.
+However, if a pod is constantly using more memory than its limit, it'll be terminated.
+
+### Resource Units
+
+G: Gigabyte  | M: Megabyte  | K: Kilobyte
+
+Gi: Gibibyte | Mi: Mebibyte | Ki: Kibibyte
+
+1K  = 1,000 bytes | 1Ki = 1,024 bytes | 1Ki > 1K
+
+## 59: Taints and Tolerations
+
+Taints are applied to nodes. Tolerations are applied to pods.
+Both these concepts together help us restrict nodes from accepting certain pods.
+Taints and tolerations DO NOT guarantee a pod will end up in a particular node.
+When Kubernetes cluster is setup, a taint is set on master node automatically.
+This prevents any pods from being scheduled on the master node.
+Best practice is to not run any application on the master node.
+
+Taint Effects:
+
+1. `NoSchedule`: Pod won't be scheduled on node. Guaranteed.
+2. `PreferNoSchedule`: Pod will TRY not to be scheduled on node. No guarantees.
+3. `NoExecute`: New pods won't be scheduled.
+   Existing pods will be evicted if they don't tolerate the taint.
+   These pods may have been scheduled before the taint was applied.
+
+## 62: Node Selectors
+
+Node selector is a simple, basic concept which helps us assign pod to a node.
+This is done by labeling the node with some key-value pair.
+Then we add this pair under the `nodeSelector` section in pod definition YAML.
+Node selector cannot be used to build complex rules like `NOT`, `AND`, etc.
+To tackle this shortcoming, we use Node Affinity rules.
+
+## 63: Node Affinity
+
+Node affinity ensures that pods are hosted on particular nodes.
+
+There are 2 types of node affinities:
+
+1. `requiredDuringSchedulingIgnoredDuringExecution`:
+   If matching node doesn't exist, pod won't be scheduled.
+   Pods will continue to run and changes to pod affinities won't impact, once scheduled.
+2. `preferredDuringSchedulingIgnoredDuringExecution`:
+   If matching node doesn't exist, scheduler will ignore pod affinity rules.
+   Pods will continue to run and changes to pod affinities won't impact, once scheduled.
+3. `requiredDuringSchedulingRequiredDuringExecution`:
+   If matching node doesn't exist, pod won't be scheduled.
+   Pods not matching affinity changes will be evicted during execution.
 
 ## Noteworthy Commands
 
@@ -131,3 +195,15 @@ and the data from `<path-to-file>` is read and stored under the name of the file
 `kubectl create serviceaccount <name>` will create a service account `<name>`.
 
 `kubectl get serviceaccount` will list all service accounts.
+
+`kubectl taint nodes <node-name> key=value:<taint-effect>`
+will apply a taint `<node-name>` with `key=value` pair and `<taint-effect>`.
+
+`kubectl taint nodes <node-name> key=value:<taint-effect>-`
+will un-taint `<node-name>` with `key=value` pair and `<taint-effect>`.
+Note the minus(`-`) sign at the very end of the command. This removes the taint.
+
+`kubectl describe node <node-name> | grep Taint` shows taint applied to `<node-name>`.
+
+`kubectl label nodes <node-name> <label-key>=<label-value>` labels node `<node-name>`
+with `<label-key>=<label-value>`.
