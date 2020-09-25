@@ -9,4 +9,11 @@ may not tell us the true state of our application.
 Thus, it is important for developers to define Readiness Probes,
 which tie into the state of the application.
 
+## 74: Liveness
+
+Let's say our application is stuck in an infinite loop due to a bug in our code.
+The container is up but the users are seeing errors. Container needs to be restarted.
+This is where Liveness probes can help us. Liveness probe can be configured on the
+container to periodically test whether the application within the container is healthy.
+
 ## Noteworthy Commands
