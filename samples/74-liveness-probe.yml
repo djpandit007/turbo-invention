@@ -21,7 +21,7 @@ spec:
           port: 8080
         initialDelaySeconds: 10 # Delay before starting Liveness probe
         periodSeconds: 5 # How often to probe?
-        failureThreshold: 8 # Min consecutive failures for the probe to be considered failed
+        failureThreshold: 8 # Consecutive failures to be considered failed
 
       # TCP Liveness Probe
       # livenessProbe:
