@@ -22,9 +22,29 @@ Once a pod is running, we can see the logs it generates.
 If there are multiple containers running inside a single pod, we should specify
 the name of the container for which we want to see the logs.
 
+## 79: Monitor and Debug Applications
+
+Heapster enabled monitoring and analysis features for Kubernetes. It is deprecated.
+Metric Server is a slimmed down version of Heapster.
+You can have one metric server per Kubernetes cluster.
+The Metrics Server retrieves metrics from each of the Kubernetes nodes and pods,
+aggregates them and store them **_in memory_**.
+Being an in-memory monitoring solution, we cannot see historical performance data.
+
+Kubernetes runs an agent on each node known as the kubelet which is responsible
+for receiving instructions from the kubernetes API Master server and running Pods
+on the nodes. The Kubelet also contains a sub-component known as the cAdvisor or
+Container Advisor. cAdvisor is responsible for retrieving performance metrics
+from pods and exposing them through the kubelet API to meet the metrics available
+for the metrics server.
+
 ## Noteworthy Commands
 
 `kubectl logs -f <pod-name>` will live stream the logs for `<pod-name>`.
 
 `kubectl logs -f <pod-name> <container-name>` will stream logs for `<container-name>`
 within `<pod-name>`, if there are multiple containers running in a single pod.
+
+`kubectl top node` provides CPU and memory usage of each node.
+
+`kubectl top pod` provides CPU and memory usage of each pod.
