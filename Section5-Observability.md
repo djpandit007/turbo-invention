@@ -16,4 +16,15 @@ The container is up but the users are seeing errors. Container needs to be resta
 This is where Liveness probes can help us. Liveness probe can be configured on the
 container to periodically test whether the application within the container is healthy.
 
+## 76: Container Logging
+
+Once a pod is running, we can see the logs it generates.
+If there are multiple containers running inside a single pod, we should specify
+the name of the container for which we want to see the logs.
+
 ## Noteworthy Commands
+
+`kubectl logs -f <pod-name>` will live stream the logs for `<pod-name>`.
+
+`kubectl logs -f <pod-name> <container-name>` will stream logs for `<container-name>`
+within `<pod-name>`, if there are multiple containers running in a single pod.
