@@ -16,6 +16,11 @@ This means there's some downtime involved. This isn't the default strategy.
 2. Rolling Update - Create new version then take down old version, one by one.
 This is the default deployment strategy.
 
+## 89: Jobs
+
+Jobs are workloads that are meant to perform a set of tasks and finish.
+Jobs live for a very short period of time.
+
 ## Noteworthy Commands
 
 `kubectl get pods --selector app=App1` will show the pods for which are labeled
