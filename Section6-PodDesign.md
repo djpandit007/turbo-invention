@@ -10,3 +10,6 @@ For example, details like build version, owner details can be added as annotatio
 
 `kubectl get pods --selector app=App1` will show the pods for which are labeled
 with `app: App1`.
+
+`kubectl get pods --selector app=App1,env=prod` will show the pods for which are
+labeled with `app: App1` AND `env=prod`.
