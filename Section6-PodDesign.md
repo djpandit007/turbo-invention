@@ -21,6 +21,10 @@ This is the default deployment strategy.
 Jobs are workloads that are meant to perform a set of tasks and finish.
 Jobs live for a very short period of time.
 
+## 90: CronJobs
+
+CRON jobs are jobs that can be scheduled.
+
 ## Noteworthy Commands
 
 `kubectl get pods --selector app=App1` will show the pods for which are labeled
