@@ -4,14 +4,14 @@ metadata:
   name: myingress
 spec:
   rules:
-  - host: "my-online-store.com"
-    http:
-      paths:
-      - path: "/wear"
-        backend:
-          serviceName: wear-service
-          servicePort: 80
-      - path: "/watch"
-        backend:
-          serviceName: watch-service
-          servicePort: 80
+    - host: "my-online-store.com"
+      http:
+        paths:
+          - path: "/wear"
+            backend:
+              serviceName: wear-service
+              servicePort: 80
+          - path: "/watch"
+            backend:
+              serviceName: watch-service
+              servicePort: 80
