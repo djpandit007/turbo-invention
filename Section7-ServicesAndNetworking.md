@@ -34,4 +34,18 @@ or move as required without impacting communication between the various services
 Each service gets an IP and name assigned to it inside the cluster and
 that is the name that should be used by other pods to access the service.
 
+## 97: Ingress Networking
+
+_**Kubernetes cluster does not come with an Ingress controller by default.**_
+
+Ingress helps users access our application using a single externally accessible URL
+that we can configure to route to different services within our cluster
+based on that URL path.
+Ingress can implement SSL security as well.
+Simply put Ingress is a layer 7 load balancer built in to the Kubernetes cluster
+that can be configured using native Kubernetes primitives.
+Ingress controllers have additional intelligence built into them to monitor the
+the Kubernetes cluster for ingress resources and configure the underlying
+NGINX server when something has changed.
+
 ## Noteworthy Commands
