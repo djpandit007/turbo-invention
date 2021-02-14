@@ -5,9 +5,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 80 # Required
-    targetPort: 80
-    nodePort: 30008
+    - port: 80 # Required
+      targetPort: 80
+      nodePort: 30008
   selector:
     app: myapp
     type: frontend
