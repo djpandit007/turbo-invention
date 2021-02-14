@@ -8,11 +8,27 @@ spec:
       role: db
   policyTypes:
     - Ingress
+    - Egress
+  # Allow ingress from Rule 1 OR Rule 2
   ingress:
     - from:
+      # Rule 1 enforces pod AND namespace selector
       - podSelector:
           matchLabels:
             name: api-pod
+        namespaceSelector:  # Note the absence of a hyphen. This is part of rule 1 and not a separate rule.
+          matchLabels:
+            name: prod
+      # Rule 2
+      - ipBlock:
+          cidr: 192.168.5.10/32
       ports:
         - protocol: TCP
           port: 3306
+  egress:
+    - to:
+      - ipBlock:
+          cidr: 192.168.5.10/32
+      ports:
+        - protocol: TCP
+          port: 80

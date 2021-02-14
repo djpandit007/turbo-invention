@@ -56,4 +56,15 @@ any additional settings like routes.
 Kubernetes is configured by default with an **"All Allow"** rule that allows traffic
 from any pod to any other pod or services within the cluster.
 
+## 104: Developing Network Policies
+
+There are 2 types of network policies: Ingress and Egress.
+Ingress is the incoming traffic and Egress is outbound traffic.
+We always consider these policies from a pod perspective.
+
+Once we allow incoming traffic, the response to that traffic is allowed automatically.
+We don't need a separate rule for that.
+When deciding on what type of rule should be created, we only need to be concerned
+about the direction in which the request originates.
+
 ## Noteworthy Commands
