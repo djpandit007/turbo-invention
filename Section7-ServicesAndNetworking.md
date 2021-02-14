@@ -26,4 +26,12 @@ externally and that is known as the **node port**.
 The default valid range for this is 30,000  to 32,767.
 If left empty, a value in range is automatically assigned.
 
+## 94: Services - Cluster IP
+
+`ClusterIP` service allows us to group the pods together and provide a single
+interface to access the pods in a group. The service allows each layer to scale
+or move as required without impacting communication between the various services.
+Each service gets an IP and name assigned to it inside the cluster and
+that is the name that should be used by other pods to access the service.
+
 ## Noteworthy Commands
