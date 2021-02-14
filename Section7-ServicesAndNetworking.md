@@ -48,4 +48,12 @@ Ingress controllers have additional intelligence built into them to monitor the
 the Kubernetes cluster for ingress resources and configure the underlying
 NGINX server when something has changed.
 
+## 103: Network Policies
+
+One of the prerequisites for networking in Kubernetes is, whatever solution we implement,
+the pods should be able to communicate with each other without having to configure
+any additional settings like routes.
+Kubernetes is configured by default with an **"All Allow"** rule that allows traffic
+from any pod to any other pod or services within the cluster.
+
 ## Noteworthy Commands
