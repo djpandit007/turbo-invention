@@ -58,6 +58,22 @@ order or if the instances need a stable name.
 The template definition for stateful set is similar to a deployment.
 Stateful sets require a headless service name to be specified.
 
+While defining a stateful set, we don't need to specify a `subdomain` or `hostname`.
+It'll automatically assign the right subdomain based on the headless service name.
+When creating a stateful set we must specify the service name explicitly using
+the service name option in the stateful set definition file. This is how it knows
+what subdomain should be assigned to the pods.
+
+## 118: Headless Services
+
+Headless service does not load balance requests but gives us a
+DNS entry to reach each pod. Headless service is created like a normal service
+but it does not have an IP of its own like a cluster IP for a normal service.
+Setting `clusterIP` to `None` is service definition creates a headless service.
+
+The pod definition needs to have `subdomain` and `hostname` defined in its template
+in order for the headless service to create a DNS record for the pod.
+
 ## Noteworthy Commands
 
 `kubectl get persistentvolume` will show all persistent volumes.
