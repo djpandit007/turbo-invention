@@ -33,6 +33,31 @@ Storage Classes allow us to dynamically provision volumes.
 
 The Storage Class automatically creates a Persistent Storage so we don't have to.
 
+## 116: Why Stateful Sets?
+
+Stateful sets are similar to deployment sets. As is, they create pods based on
+templates. They can scale up and scale down. They can perform rolling updates
+and rollbacks.
+
+There are differences though:
+
+- With stateful sets, pods are created in a sequential
+  order. After the first pod is deployed, it must be in a running and ready state
+  before the next pod is deployed.
+- Stateful sets assign a unique ordinal index to each pod starting from zero
+  and incrementing by 1. Each pod gets a unique name derived from this index
+  combined with the stateful set name. We can be sure that the first pod in
+  any stateful set is always going to be name of the stateful set followed by zero.
+  Stateful sets maintain a sticky identity for each of their pods.
+
+Stateful sets should be used if our instances need to come up in a particular
+order or if the instances need a stable name.
+
+## 117: Stateful Sets Introduction
+
+The template definition for stateful set is similar to a deployment.
+Stateful sets require a headless service name to be specified.
+
 ## Noteworthy Commands
 
 `kubectl get persistentvolume` will show all persistent volumes.
