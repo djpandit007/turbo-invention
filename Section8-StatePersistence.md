@@ -21,6 +21,18 @@ to Claims based on the request and properties set on the volume.
 Every Persistent Volume Claim is bound to a single Persistent Volume. There is a
 1:1 mapping between Persistent Volume and Persistent Volume Claim.
 
+## 114: Storage Classes
+
+Every time an application requires storage we have to manually provision the disk
+and then manually create a persistent volume definition file using the same name
+as that of the disk created. This is called Static Provisioning of Volumes.
+
+We can define a provisioner that can automatically provision storage and attach
+that to pods when a claim is made. That's called Dynamic Provisioning of Volumes.
+Storage Classes allow us to dynamically provision volumes.
+
+The Storage Class automatically creates a Persistent Storage so we don't have to.
+
 ## Noteworthy Commands
 
 `kubectl get persistentvolume` will show all persistent volumes.
