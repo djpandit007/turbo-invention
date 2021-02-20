@@ -24,3 +24,6 @@ Every Persistent Volume Claim is bound to a single Persistent Volume. There is a
 ## Noteworthy Commands
 
 `kubectl get persistentvolume` will show all persistent volumes.
+
+`kubectl exec <pod-name> -- cat <file-path>` will read the file located at
+`file-path` within the pod `pod-name`.
