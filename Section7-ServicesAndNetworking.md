@@ -66,3 +66,7 @@ Once we allow incoming traffic, the response to that traffic is allowed automati
 We don't need a separate rule for that.
 When deciding on what type of rule should be created, we only need to be concerned
 about the direction in which the request originates.
+
+## Noteworthy Commands
+
+`kubectl get all --all-namespaces` show us all created objects under all namespaces.
