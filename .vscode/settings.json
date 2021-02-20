@@ -1,10 +1,13 @@
 {
   "cSpell.words": [
+    "Kubernetes",
     "account",
     "automount",
     "automount service account token",
     "configmap",
     "configmaps",
+    "kubectl",
+    "persistentvolume",
     "replicaset",
     "service",
     "serviceaccount",
